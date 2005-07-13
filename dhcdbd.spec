@@ -3,8 +3,8 @@
 # - move header file to -devel
 # - split an -init
 #
-Summary:	DHCP D-BUS daemon (dhcdbd) controls dhclient sessions with D-BUS, stores and presents DHCP options.
-#Summary(pl):
+Summary:	DHCP D-BUS daemon (dhcdbd) controls dhclient sessions with D-BUS, stores and presents DHCP options
+Summary(pl):	Demon DHCP D-BUS (dhcdbd) - sterowanie sesjami dhclient przy u¿yciu D-BUS, przechowywanie opcji DHCP
 Name:		dhcdbd
 Version:	1.6
 Release:	1
@@ -13,7 +13,7 @@ Group:		Networking/Daemons
 Source0:	http://people.redhat.com/~jvdias/dhcdbd/%{name}-%{version}.tar.gz
 # Source0-md5:	e46269dcfceca8fb678e48a42450db0b
 Source1:	%{name}.init
-URL:		http://people.redhat.com/~jvdias/dhcdbd
+URL:		http://people.redhat.com/~jvdias/dhcdbd/
 BuildRequires:	dbus-devel >= 0.33
 Requires:	dbus >= 0.33
 Requires:	dhcp-client >= 3.0.2
@@ -24,16 +24,18 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 DHCP D-BUS daemon (dhcdbd) controls dhclient sessions with D-BUS,
 stores and presents DHCP options.
 
-#description -l pl
+%description -l pl
+Demon DHCP D-BUS (dhcdbd) steruje sesjami dhclient przy u¿yciu D-BUS,
+a tak¿e przechowuje i przedstawia opcje DHCP.
 
 %prep
 %setup -q
 
 %build
 %{__make} \
-	CFLAGS="%{rpmcflags}"
-	LDFALGS="%{rpmldflags}"
-	CC="%{__gcc}"
+	CC="%{__cc}" \
+	CFLAGS="%{rpmcflags}" \
+	LDFLAGS="%{rpmldflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -57,7 +59,6 @@ else
 	echo "to reload the *.service database."
 fi
 
-
 %preun
 if [ "$1" = "0" ]; then
 	if [ -f /var/lock/subsys/dhcdbd ]; then
@@ -71,5 +72,5 @@ fi
 %doc README LICENSE dhcp_options.h dhcdbd.h dbus_service.h
 %attr(755,root,root) /sbin/dhcdbd
 %attr(754,root,root) /etc/rc.d/init.d/dhcdbd
-%config(noreplace) %{_sysconfdir}/dbus-1/system.d/dhcdbd.conf
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/dbus-1/system.d/dhcdbd.conf
 %{_datadir}/dbus-1/services/dhcdbd.service
