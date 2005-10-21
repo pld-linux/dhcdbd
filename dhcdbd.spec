@@ -20,6 +20,8 @@ Requires:	dhcp-client >= 3.0.2
 Requires:	rc-scripts
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+%define		%{_sbindir}	/sbin
+
 %description
 DHCP D-BUS daemon (dhcdbd) controls dhclient sessions with D-BUS,
 stores and presents DHCP options.
@@ -44,7 +46,7 @@ install -d $RPM_BUILD_ROOT/etc/rc.d/init.d
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install -c %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/dhcdbd
+install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/dhcdbd
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -70,7 +72,7 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc README LICENSE dhcp_options.h dhcdbd.h dbus_service.h
-%attr(755,root,root) /sbin/dhcdbd
+%attr(755,root,root) %{_sbindir}/dhcdbd
 %attr(754,root,root) /etc/rc.d/init.d/dhcdbd
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/dbus-1/system.d/dhcdbd.conf
 %{_datadir}/dbus-1/services/dhcdbd.service
