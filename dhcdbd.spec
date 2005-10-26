@@ -66,7 +66,7 @@ if [ "$1" = "0" ]; then
 	if [ -f /var/lock/subsys/dhcdbd ]; then
 		/etc/rc.d/init.d/dhcdbd stop 1>&2
 	fi
-	[ ! -x /sbin/chkconfig ] || /sbin/chkconfig --fel dhcdbd
+	[ ! -x /sbin/chkconfig ] || /sbin/chkconfig --del dhcdbd
 fi
 
 %files
