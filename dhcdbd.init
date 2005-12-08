@@ -4,7 +4,7 @@
 #
 # chkconfig:	345 89 11
 # description:	dhcdbd provides D-BUS control of the ISC DHCP client, dhclient,
-#		and D-BUS access to the DHCP options obtained by dhclient 
+#		and D-BUS access to the DHCP options obtained by dhclient
 #		for each IPv4 interface.
 # processname:	dhcdbd
 # pidfile:	/var/run/dhcdbd.pid
