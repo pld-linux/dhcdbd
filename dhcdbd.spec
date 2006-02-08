@@ -16,7 +16,7 @@ Source1:	%{name}.init
 URL:		http://people.redhat.com/~jvdias/dhcdbd/
 BuildRequires:	dbus-devel >= 0.33
 Requires:	dbus >= 0.33
-Requires:	dhcp-client >= 3.0.2
+Requires:	dhcp-client >= 3:3.0.3-3
 Requires:	rc-scripts
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
