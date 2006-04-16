@@ -15,6 +15,7 @@ Source0:	http://people.redhat.com/~jvdias/dhcdbd/%{name}-%{version}.tar.gz
 Source1:	%{name}.init
 URL:		http://people.redhat.com/~jvdias/dhcdbd/
 BuildRequires:	dbus-devel >= 0.33
+BuildRequires:	rpmbuild(macros) >= 1.268
 Requires:	dbus >= 0.33
 Requires:	dhcp-client >= 3:3.0.3-3
 Requires:	rc-scripts
@@ -53,20 +54,16 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 /sbin/chkconfig --add dhcdbd
+%service dhcdbd restart "DHCP D-BUS daemon"
 if [ -f /var/lock/subsys/dhcdbd ]; then
-	/etc/rc.d/init.d/dhcdbd restart 1>&2
-else
-	echo "Run \"/etc/rc.d/init.d/dhcdbd start\" to start DHCP D-BUS daemon."
-	echo "You will probably also need \"/etc/rc.d/init.d/messagebus restart\""
+	echo "You will probably also need \"/sbin/service messagebus restart\""
 	echo "to reload the *.service database."
 fi
 
 %preun
 if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/dhcdbd ]; then
-		/etc/rc.d/init.d/dhcdbd stop 1>&2
-	fi
-	[ ! -x /sbin/chkconfig ] || /sbin/chkconfig --del dhcdbd
+	%service dhcdbd stop
+	/sbin/chkconfig --del dhcdbd
 fi
 
 %files
