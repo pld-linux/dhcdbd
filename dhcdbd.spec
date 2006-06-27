@@ -38,7 +38,7 @@ a tak¿e przechowuje i przedstawia opcje DHCP.
 %build
 %{__make} \
 	CC="%{__cc}" \
-	CFLAGS="%{rpmcflags}" \
+	CFLAGS="%{rpmcflags} -I%{_libdir}/dbus-1.0/include" \
 	LDFLAGS="%{rpmldflags}"
 
 %install
