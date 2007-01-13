@@ -13,7 +13,7 @@ Group:		Networking/Daemons
 Source0:	http://people.redhat.com/dcantrel/dhcdbd/%{name}-%{version}.tar.bz2
 # Source0-md5:	9c25069a2f1ed2efbe41cf8d5faf7955
 Source1:	%{name}.init
-URL:		http://people.redhat.com/dcantrel/dhcdbd
+URL:		http://people.redhat.com/dcantrel/dhcdbd/
 BuildRequires:	dbus-devel >= 0.33
 BuildRequires:	rpmbuild(macros) >= 1.268
 Requires(post,preun):	/sbin/chkconfig
