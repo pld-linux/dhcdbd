@@ -6,15 +6,14 @@
 Summary:	DHCP D-BUS daemon (dhcdbd) controls dhclient sessions with D-BUS, stores and presents DHCP options
 Summary(pl):	Demon DHCP D-BUS (dhcdbd) - sterowanie sesjami dhclient przy u¿yciu D-BUS, przechowywanie opcji DHCP
 Name:		dhcdbd
-Version:	1.14
+Version:	2.2
 Release:	1
 License:	GPL
 Group:		Networking/Daemons
-Source0:	http://people.redhat.com/~jvdias/dhcdbd/%{name}-%{version}.tar.gz
-# Source0-md5:	1180dee7a51a4384d55768650634cf93
+Source0:	http://people.redhat.com/dcantrel/dhcdbd/%{name}-%{version}.tar.bz2
+# Source0-md5:	9c25069a2f1ed2efbe41cf8d5faf7955
 Source1:	%{name}.init
-Patch0:		%{name}-dbus.patch
-URL:		http://people.redhat.com/~jvdias/dhcdbd/
+URL:		http://people.redhat.com/dcantrel/dhcdbd
 BuildRequires:	dbus-devel >= 0.33
 BuildRequires:	rpmbuild(macros) >= 1.268
 Requires(post,preun):	/sbin/chkconfig
@@ -33,13 +32,14 @@ a tak¿e przechowuje i przedstawia opcje DHCP.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %{__make} \
 	CC="%{__cc}" \
-	CFLAGS="%{rpmcflags} -I%{_libdir}/dbus-1.0/include" \
+	CFLAGS="%{rpmcflags} -I../include"
 	LDFLAGS="%{rpmldflags}"
+
+%{__sed} -i -e"s@Exec=.*@Exec=%{_sbindir}/dhcdbd@" dhcdbd.service
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -71,7 +71,7 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc README LICENSE
+%doc README
 %attr(755,root,root) %{_sbindir}/dhcdbd
 %attr(754,root,root) /etc/rc.d/init.d/dhcdbd
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/dbus-1/system.d/dhcdbd.conf
