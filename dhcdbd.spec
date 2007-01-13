@@ -18,7 +18,7 @@ BuildRequires:	dbus-devel >= 0.33
 BuildRequires:	rpmbuild(macros) >= 1.268
 Requires(post,preun):	/sbin/chkconfig
 Requires:	dbus >= 0.33
-Requires:	dhcp-client >= 3:3.0.3-3
+Requires:	dhcp-client >= 4:3.0.5-1
 Requires:	rc-scripts
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
