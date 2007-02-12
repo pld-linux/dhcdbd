@@ -4,7 +4,7 @@
 # - split an -init  (what for? --radek)
 #
 Summary:	DHCP D-BUS daemon (dhcdbd) controls dhclient sessions with D-BUS, stores and presents DHCP options
-Summary(pl):	Demon DHCP D-BUS (dhcdbd) - sterowanie sesjami dhclient przy uøyciu D-BUS, przechowywanie opcji DHCP
+Summary(pl.UTF-8):   Demon DHCP D-BUS (dhcdbd) - sterowanie sesjami dhclient przy u≈ºyciu D-BUS, przechowywanie opcji DHCP
 Name:		dhcdbd
 Version:	2.2
 Release:	1
@@ -26,9 +26,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 DHCP D-BUS daemon (dhcdbd) controls dhclient sessions with D-BUS,
 stores and presents DHCP options.
 
-%description -l pl
-Demon DHCP D-BUS (dhcdbd) steruje sesjami dhclient przy uøyciu D-BUS,
-a takøe przechowuje i przedstawia opcje DHCP.
+%description -l pl.UTF-8
+Demon DHCP D-BUS (dhcdbd) steruje sesjami dhclient przy u≈ºyciu D-BUS,
+a tak≈ºe przechowuje i przedstawia opcje DHCP.
 
 %prep
 %setup -q
