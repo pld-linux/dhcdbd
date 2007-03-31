@@ -6,12 +6,12 @@
 Summary:	DHCP D-BUS daemon (dhcdbd) controls dhclient sessions with D-BUS, stores and presents DHCP options
 Summary(pl.UTF-8):	Demon DHCP D-BUS (dhcdbd) - sterowanie sesjami dhclient przy użyciu D-BUS, przechowywanie opcji DHCP
 Name:		dhcdbd
-Version:	2.2
+Version:	2.6
 Release:	1
 License:	GPL
 Group:		Networking/Daemons
 Source0:	http://people.redhat.com/dcantrel/dhcdbd/%{name}-%{version}.tar.bz2
-# Source0-md5:	9c25069a2f1ed2efbe41cf8d5faf7955
+# Source0-md5:	e8242676e71787ec6b7e800d28cb9a3f
 Source1:	%{name}.init
 URL:		http://people.redhat.com/dcantrel/dhcdbd/
 BuildRequires:	dbus-devel >= 0.33
