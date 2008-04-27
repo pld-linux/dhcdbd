@@ -37,7 +37,7 @@ case "$1" in
   	if [ -f /var/lock/subsys/messagebus ]; then
 		if [ ! -f /var/lock/subsys/dhcdbd ]; then
 			msg_starting dhcdbd
-			daemon dhcdbd --system
+			daemon /usr/sbin/dhcdbd --system
 			RETVAL=$?
 			[ $RETVAL -eq 0 ] && touch /var/lock/subsys/dhcdbd
 		else
