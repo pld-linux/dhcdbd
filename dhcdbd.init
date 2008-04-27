@@ -9,7 +9,8 @@
 # processname:	dhcdbd
 # pidfile:	/var/run/dhcdbd.pid
 # config:	/etc/dbus-1/system.d/dhcdbd.conf
-
+#
+# $Id$
 
 # Source function library
 . /etc/rc.d/init.d/functions
@@ -30,10 +31,7 @@ else
 	exit 0
 fi
 
-RETVAL=0
-# See how we were called.
-case "$1" in
-  start)
+start() {
   	if [ -f /var/lock/subsys/messagebus ]; then
 		if [ ! -f /var/lock/subsys/dhcdbd ]; then
 			msg_starting dhcdbd
@@ -46,8 +44,9 @@ case "$1" in
 	else
 		msg_not_running messagebus
 	fi
-	;;
-  stop)
+}
+
+stop() {
   	msg_stopping dhcdbd
   	if [ -f /var/run/dhcdbd.pid ]; then
 		checkpid `cat /var/run/dhcdbd.pid` >/dev/null 2>&1
@@ -77,6 +76,20 @@ case "$1" in
 	else
 		msg_not_running messagebus
 	fi
+}
+
+RETVAL=0
+# See how we were called.
+case "$1" in
+  start)
+  	start
+	;;
+  stop)
+  	stop
+	;;
+  restart)
+	stop
+	start
 	;;
   status)
 	status dhcdbd
@@ -97,10 +110,6 @@ case "$1" in
 			fi
 		fi
 	fi
-	;;
-  restart)
-	$0 stop
-	$0 start
 	;;
   *)
 	msg_usage "$0 {start|stop|restart|status}"
