@@ -67,9 +67,11 @@ stop() {
 				/com/redhat/dhcp \
 				com.redhat.dhcp.quit >/dev/null 2>&1
 			if [ $? -eq 0 ]; then
-				rm -f /var/lock/subsys/dhcdbd /var/run/dhcdbd.pid >/dev/null 2>&1
+				ok
+			else
+				fail
 			fi
-			ok
+			rm -f /var/lock/subsys/dhcdbd /var/run/dhcdbd.pid >/dev/null 2>&1
 		else
 			msg_not_running dhcdbd
 		fi
